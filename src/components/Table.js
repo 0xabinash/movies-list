@@ -3,15 +3,13 @@ import "./styles/table.css";
 import axios from 'axios';
 import ReactPaginate from 'react-paginate';
 
-const Table = ({moviesData, setMoviesData, searchText, totalPages}) => {
-    const [currentPage, setCurrentPage] = useState(1)
-
-
+const Table = ({moviesData, setMoviesData, searchText, totalPages, remountComponent, currentPage, setCurrentPage}) => {
+    
     const tableHeaders = ["Poster", "Title", "Type", "Year"];
 
     const handlePageClick = async (event)=>{
         setCurrentPage(event.selected+1);
-        const {data} = await axios.get(`https://omdbapi.com/?apikey=d24be522&s=${searchText}&page=${event.selected+1}`);
+        const {data} = await axios.get(`https://omdbapi.com/?apikey=deebb551&s=${searchText}&page=${event.selected+1}`);
         console.log("data->", data)
         setMoviesData(data);
     }
@@ -47,23 +45,25 @@ const Table = ({moviesData, setMoviesData, searchText, totalPages}) => {
                 }
             </tbody>
         </table>
-
-        <ReactPaginate
-            breakLabel="..."
-            nextLabel="next >"
-            onPageChange={handlePageClick}
-            pageRangeDisplayed={5}
-            pageCount={totalPages}
-            previousLabel="< previous"
-            renderOnZeroPageCount={null}
-            containerClassName="pagination"
-            pageLinkClassName="page-num"
-            previousLinkClassName={currentPage === 1?"page-num prev": "page-num"}
-            nextLinkClassName={currentPage === totalPages?"page-num prev": "page-num"}
-            activeLinkClassName="active"
-       />
+        
+        <div key={remountComponent}>
+            <ReactPaginate
+                breakLabel="..."
+                nextLabel="next >"
+                onPageChange={handlePageClick}
+                pageRangeDisplayed={5}
+                pageCount={totalPages}
+                previousLabel="< previous"
+                renderOnZeroPageCount={null}
+                containerClassName="pagination"
+                pageLinkClassName="page-num"
+                previousLinkClassName={currentPage === 1?"page-num prev": "page-num"}
+                nextLinkClassName={currentPage === totalPages?"page-num prev": "page-num"}
+                activeLinkClassName="active"
+        />
+       </div>
     </div>
   )
 }
 
-export default Table
+export default Table;
