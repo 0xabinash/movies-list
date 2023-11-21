@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import "./styles/table.css";
 import axios from 'axios';
 import ReactPaginate from 'react-paginate';
