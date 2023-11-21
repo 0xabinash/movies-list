@@ -2,4 +2,12 @@
     padding: 3rem 6rem;
     display: flex;
     justify-content: center;
+    position: relative;
+}
+
+.error-message, .loading{
+    font-size: 60px;
+    letter-spacing: 10px;
+    position: absolute;
+    top: 300px;
 }

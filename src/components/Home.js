@@ -9,6 +9,7 @@ const Home = () => {
   const [moviesData, setMoviesData] = useState([])
   const [searchText, setSearchText] = useState()
   const [error, setError] = useState({status: false, message:""});
+  const [totalPages, setTotalPages] = useState(1)
 
 
   const fetchData = async(searchText)=>{
@@ -29,6 +30,7 @@ const Home = () => {
     (async()=>{
         const data = await fetchData(searchText);
 
+        setTotalPages(Math.ceil(data?.totalResults/10))
         setMoviesData(data)
     })()
   },[searchText])
@@ -42,12 +44,12 @@ const Home = () => {
           (()=>{
             if(error.status){
               return(
-                <div>{error.message}</div>
+                <div className="error-message">{error.message}</div>
               )
             }
             else{
-              return  moviesData.length === 0 ? (<div>Loading...</div>):
-              (<Table moviesData={moviesData} searchText={searchText} setMoviesData={setMoviesData} />) 
+              return  moviesData.length === 0 ? (<div className="loading">Loading...</div>):
+              (<Table moviesData={moviesData} searchText={searchText} setMoviesData={setMoviesData} totalPages={totalPages} />) 
             }
           })()
         }

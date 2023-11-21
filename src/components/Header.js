@@ -19,7 +19,7 @@ const Header = ({setSearchText}) => {
 
       const timeoutID = setTimeout(()=>{
         setSearchText(searchWord);
-      },700)
+      },500)
 
       setDebounceTimer(timeoutID);
     }

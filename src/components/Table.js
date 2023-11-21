@@ -3,15 +3,11 @@ import "./styles/table.css";
 import axios from 'axios';
 import ReactPaginate from 'react-paginate';
 
-const Table = ({moviesData, setMoviesData, searchText}) => {
-
+const Table = ({moviesData, setMoviesData, searchText, totalPages}) => {
     const [currentPage, setCurrentPage] = useState(1)
-    const [totalPages, setTotalPages] = useState(Math.ceil(moviesData.totalResults/10))
+
 
     const tableHeaders = ["Poster", "Title", "Type", "Year"];
-
-
-    // console.log(moviesData)
 
     const handlePageClick = async (event)=>{
         setCurrentPage(event.selected+1);
